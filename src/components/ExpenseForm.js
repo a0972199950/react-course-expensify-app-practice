@@ -70,7 +70,7 @@ class ExpenseForm extends React.Component{
             // dispatch表單
             this.props.onSubmit({
                 description,
-                amount,
+                amount: parseInt(amount),
                 createdAt,
                 note
             });

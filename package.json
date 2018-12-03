@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "build": "webpack",
+    "build:dev": "webpack",
+    "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server --open"
   },
   "keywords": [],
@@ -18,10 +19,13 @@
     "babel-loader": "^8.0.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "css-loader": "^1.0.0",
+    "express": "^4.16.4",
     "live-server": "^1.2.0",
+    "mini-css-extract-plugin": "^0.4.5",
     "moment": "^2.22.2",
     "node-sass": "^4.9.4",
     "normalize.css": "^8.0.0",
+    "numeral": "^2.0.6",
     "react": "^16.5.2",
     "react-addons-shallow-compare": "^15.6.2",
     "react-dates": "^12.7.0",
