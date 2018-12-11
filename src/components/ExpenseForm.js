@@ -9,7 +9,7 @@ class ExpenseForm extends React.Component{
     state = {
         description: this.props.expenseToEdit ? this.props.expenseToEdit.description : "",
         amount: this.props.expenseToEdit ? this.props.expenseToEdit.amount : "",
-        createdAt: this.props.expenseToEdit ? this.props.expenseToEdit.createdAt : moment(),
+        createdAt: this.props.expenseToEdit ? moment(this.props.expenseToEdit.createdAt) : moment(),
         note: this.props.expenseToEdit ? this.props.expenseToEdit.note : "",
         error: "",
         calendarFocused: false
@@ -71,7 +71,7 @@ class ExpenseForm extends React.Component{
             this.props.onSubmit({
                 description,
                 amount: parseInt(amount),
-                createdAt,
+                createdAt: createdAt.valueOf(),
                 note
             });
         }        
