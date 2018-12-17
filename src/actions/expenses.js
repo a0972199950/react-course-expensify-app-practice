@@ -11,8 +11,10 @@ export const addExpense = (expense) => ({
 export const startAddExpense = ({ description = "", amount = 0, createdAt = 0, note = "" } = {}) => {
     const expense = { description, amount, createdAt, note };
 
-    return (dispatch) => {
-        database.ref("expenses").push(expense).then((ref) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+
+        database.ref(`users/${uid}/expenses`).push(expense).then((ref) => {
             dispatch(addExpense({
                 id: ref.key,
                 ...expense
@@ -31,8 +33,10 @@ export const removeExpense = (id = undefined) => ({
 
 // remove expense from firebase
 export const startRemoveExpense = (id = undefined) => {
-    return (dispatch) => {
-        database.ref("expenses/" + id).remove().then(() => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+
+        database.ref(`users/${uid}/expenses/${id}`).remove().then(() => {
             dispatch(removeExpense(id));
         });
     };
@@ -49,11 +53,42 @@ export const editExpense = (id = undefined, updates) => ({
 
 // edit expense from firebase
 export const startEditExpense = (id, updates) => {
-    return (dispatch) => {
-        database.ref("expenses/" + id).update(updates).then(() => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+
+        database.ref(`users/${uid}/expenses/${id}`).update(updates).then(() => {
             dispatch(editExpense(id, updates));
         });
     };
 };
+
+
+// initialize expenses to redux state
+export const setExpenses = (expenses) => ({
+    type: "SET_EXPENSES",
+    expenses
+});
+
+
+// fatch expenses from firebase
+export const startSetExpenses = () => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+
+        return database.ref(`users/${uid}/expenses`).once("value").then((snapshot) => {
+            const expensesArray = [];
+
+            snapshot.forEach((childSnapshot) => {
+                expensesArray.push({
+                    id: childSnapshot.key,
+                    ...childSnapshot.val()
+                });
+            });
+    
+            dispatch(setExpenses(expensesArray));
+        });
+    }
+    
+}
 
 

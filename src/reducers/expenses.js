@@ -22,6 +22,9 @@ export default (state = expenseReducerDefaultData, action) => {
                 return expense.id !== action.id;
             });
 
+        case "SET_EXPENSES":
+            return action.expenses;
+
         default:
             return state;
     };

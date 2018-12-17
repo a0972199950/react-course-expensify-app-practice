@@ -2,9 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import AppRouter from "./routers/AppRouter";
 import ConfigureStore from "./store/ConfigureStore";
-import { addExpense } from "./actions/expenses";
 import { Provider } from "react-redux";
-import moment from "moment";
+import { firebase } from "./firebase/firebase";
+import { login, logout } from "./actions/auth";
+import { startSetExpenses } from "./actions/expenses";
 
 // normalize.css是一長串某人寫好的，用來初始化所有瀏覽器預設樣式設定的css
 import "normalize.css/normalize.css";
@@ -18,52 +19,47 @@ import "./styles/styles.scss";
 
 const store = ConfigureStore();
 
-// addExpense
-const expense1 = store.dispatch(addExpense({
-    description: "phone",
-    note: "My new phone",
-    amount: 10999,
-    createdAt: moment(500)
-}));
-
-const expense2 = store.dispatch(addExpense({
-    description: "dinner",
-    note: "Dinner today",
-    amount: 150,
-    createdAt: moment(900)
-}));
-
-const expense3 = store.dispatch(addExpense({
-    description: "dinner",
-    note: "Dinner tomorrow",
-    amount: 200,
-    createdAt: moment(1000)
-}));
-
-const expense4 = store.dispatch(addExpense({
-    description: "dinner",
-    note: "Dinner yesterday",
-    amount: 900,
-    createdAt: moment(-50)
-}));
-
-const expense5 = store.dispatch(addExpense({
-    description: "pc",
-    note: "lg gram 15z980",
-    amount: 43900,
-    createdAt: moment(300)
-}));
-
-
-
-
 // provide a higher-ordered component to connect redux and react
 const jsx = (
     <Provider store={store}>
         <AppRouter />
     </Provider>
-)
+);
+
+let hasRendered = false;
+const renderApp = () => {
+    if(!hasRendered){
+        ReactDOM.render(jsx, document.getElementById("app"));
+        hasRendered = true;
+    }
+}
+
+ReactDOM.render(<p>Loading...</p>, document.getElementById("app"));
 
 
-ReactDOM.render(jsx, document.getElementById("app"));
+
+firebase.auth().onAuthStateChanged((user) => {
+    if(user){
+        console.log("log in");
+        store.dispatch(login(user.uid));
+
+        store.dispatch(startSetExpenses()).then(() => {
+            renderApp();
+        });
+        
+
+
+    } else{
+        console.log("log out");
+        store.dispatch(logout());
+
+        renderApp();
+
+    }
+});
+
+
+
+
+
 
