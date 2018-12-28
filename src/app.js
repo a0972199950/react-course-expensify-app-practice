@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { firebase } from "./firebase/firebase";
 import { login, logout } from "./actions/auth";
 import { startSetExpenses } from "./actions/expenses";
+import LoadingPage from "./components/LoadingPage";
 
 // normalize.css是一長串某人寫好的，用來初始化所有瀏覽器預設樣式設定的css
 import "normalize.css/normalize.css";
@@ -34,7 +35,7 @@ const renderApp = () => {
     }
 }
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById("app"));
+ReactDOM.render(<LoadingPage />, document.getElementById("app"));
 
 
 

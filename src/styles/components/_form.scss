@@ -1,0 +1,31 @@
+.form {
+    margin-bottom: $l-size;
+}
+
+.form__inputs {
+    display: flex;
+    flex-direction: column;
+
+    > * {
+        margin-bottom: $m-size;
+        font-size: $font-size-large;
+    }
+}
+
+.form__actions {
+    display: flex;
+    
+    @media (max-width: $mobile-break-point) {        
+        flex-direction: column;
+    }
+}
+
+.form__actions__item {
+    display: flex;
+    margin: 0 $s-size 0 0;
+
+    @media (max-width: $mobile-break-point) {
+        flex-direction: column;
+        margin: 0 0 $s-size 0;        
+    }
+}

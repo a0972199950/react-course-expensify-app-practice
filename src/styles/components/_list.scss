@@ -1,0 +1,46 @@
+.list {
+    margin-bottom: $l-size;
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    background: $off-white;
+    padding: $s-size $m-size;
+    border: 1px darken($off-white, 7%) solid;
+    color: $gray;
+    font-size: 1.6rem;;
+}
+
+.list-item {
+    border: 1px darken($off-white, 7%) solid;
+    border-top: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $s-size $m-size;
+    transition: background .2s ease;
+
+    &:hover {
+        background: $off-white;
+    }
+}
+
+.list-item__title {
+    margin: 0;
+    color: $dark-gray;
+}
+
+.list-item__sub-title {
+    margin: 0;
+    color: $gray;
+    font-size: $font-size-small;
+}
+
+
+
+.list-item__data {
+    margin: 0;
+    color: $dark-gray;
+
+}

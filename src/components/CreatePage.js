@@ -5,10 +5,19 @@ import { startAddExpense } from "../actions/expenses";
 
 const CreatePage = (props) => (
     <div>
-        <ExpenseForm onSubmit={(expenseToAdd) => {
-            props.dispatch(startAddExpense(expenseToAdd));
-            props.history.push("/");
-        }}/>
+        <div className="page-header">
+            <div className="content-container">
+                <h1 className="page-header__title">Add Expense</h1>
+            </div>
+        </div>
+
+        <div className="content-container">
+            <ExpenseForm onSubmit={(expenseToAdd) => {
+                props.dispatch(startAddExpense(expenseToAdd));
+                props.history.push("/");
+            }}/>
+        </div>
+        
     </div>
 );
 

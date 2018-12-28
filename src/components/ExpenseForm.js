@@ -50,9 +50,9 @@ class ExpenseForm extends React.Component{
         }))
     }
 
-    onSubmit = (event) => {
+    onSetExpense = (e) => {
         // 阻止表單提交
-        event.preventDefault();
+        e.preventDefault();
 
         // 解構物件
         const {description, amount, createdAt, note} = this.state;
@@ -77,12 +77,47 @@ class ExpenseForm extends React.Component{
         }        
     }
 
+    onDeleteExpense = (e) => {
+        e.preventDefault();
+
+        this.props.onDeleteExpense();
+    }
+
+    // onSubmit = (event) => {
+    //     // 阻止表單提交
+    //     event.preventDefault();
+
+    //     // 解構物件
+    //     const {description, amount, createdAt, note} = this.state;
+
+    //     // 檢查必填資料
+    //     if(!description || !amount){
+    //         this.setState(() => ({
+    //             error: "Pleace fill out description and amount"
+    //         }));
+    //     } else{
+    //         this.setState(() => ({
+    //             error: ""
+    //         }));
+
+    //         // dispatch表單
+    //         this.props.onSubmit({
+    //             description,
+    //             amount: parseInt(amount),
+    //             createdAt: createdAt.valueOf(),
+    //             note
+    //         });
+    //     }        
+    // }
+
     render(){
         return (
-            <div>
-                {this.state.error && <p>{this.state.error}</p>}
-                <form onSubmit={this.onSubmit}>
+            <form className="form" onSubmit={this.onSubmit}>
+
+                <div className="form__inputs">
+                    {this.state.error && <p>{this.state.error}</p>}
                     <input 
+                        className="text-input"
                         type="text" 
                         placeholder="description" 
                         value={this.state.description}
@@ -90,6 +125,7 @@ class ExpenseForm extends React.Component{
                     />
 
                     <input 
+                        className="text-input"
                         type="text" 
                         placeholder="amount" 
                         value={this.state.amount}
@@ -106,16 +142,27 @@ class ExpenseForm extends React.Component{
                     />
 
                     <textarea 
-                        placeholder="note"
+                        className="textarea"
+                        placeholder="note(optional)"
                         value={this.state.note}
                         onChange={this.onNoteChange}
                     >
                     </textarea>
+                </div>
 
-                    <button>{this.props.expenseToEdit ? "Edit Expense" : "Add Expense"}</button>
+                <div className="form__actions">
+                    <div className="form__actions__item">
+                        <button className="button" onClick={this.onSetExpense}>{this.props.expenseToEdit ? "Edit Expense" : "Add Expense"}</button>
+                    </div>
 
-                </form>
-            </div>
+                    {this.props.expenseToEdit ? (
+                        <div className="form__actions__item">
+                            <button class="button button--delete" onClick={this.onDeleteExpense}>DELETE</button>
+                        </div>
+                    ) : false}
+                </div>
+
+            </form>
         );        
     }
 }

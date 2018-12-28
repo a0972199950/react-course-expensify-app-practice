@@ -12,10 +12,10 @@ export default (expenses, {text, sortBy, startDate, endDate}) => {
     }).sort((a, b) => {
         switch(sortBy){
             case "amount":
-                return (a.amount < b.amount) ? -1 : (a.amount > b.amount) ? 1 : 0;
+                return (a.amount < b.amount) ? 1 : (a.amount > b.amount) ? -1 : 0;
 
             case "date":
-                return (a.createdAt < b.createdAt) ? -1 : (a.createdAt > b.createdAt) ? 1 : 0;
+                return (a.createdAt < b.createdAt) ? 1 : (a.createdAt > b.createdAt) ? -1 : 0;
 
             default:
                 return 0;

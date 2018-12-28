@@ -6,13 +6,18 @@ import moment from "moment";
 
 const ExpenseListItem = ({ expense }) => {
     return (
-        <div>
-            <Link to={`edit/${expense.id}`}>
-                <h3>{expense.description}</h3>
-            </Link>
+        <Link className="list-item" to={`edit/${expense.id}`}>
+            <div>
+                <h3 className="list-item__title">{expense.description}</h3>
+                <span className="list-item__sub-title">{moment(expense.createdAt).format("YYYY/MM/DD")}</span>
+            </div>
+
+            <div className="list-item__data">
+                <h3 className="list-item__data">{numeral(expense.amount).format("$0,0")}</h3>
+            </div>
             
-            <p>amount:{numeral(expense.amount).format("$0,0")} / date:{moment(expense.createdAt).format("YYYY/MM/DD")}</p>
-        </div>
+        </Link>
+
     );
 };
 

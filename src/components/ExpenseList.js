@@ -5,13 +5,25 @@ import getVisibleExpenses from "../selectors/getVisibleExpenses";
 
 const ExpenseList = (props) => {
     return (
-        <div>
-            {props.expenses.length === 0 && (
-                <p>No expenses exist.</p>
-            )}
-            {props.expenses.map((expense) => {
-                return <ExpenseListItem key={expense.id} expense={expense} />
-            })}
+        <div className="list">
+            <div className="content-container">
+
+                <div className="list-header">
+                    <div className="show-for-desktop">Expense</div>
+                    <div className="show-for-desktop">Amount</div>
+                    <div className="show-for-mobile">Expenses</div>
+                </div>
+
+                <div>
+                    {props.expenses.length === 0 && (
+                        <p>No expenses exist.</p>
+                    )}
+                    {props.expenses.map((expense) => {
+                        return <ExpenseListItem key={expense.id} expense={expense} />
+                    })}
+                </div>
+
+            </div>
         </div>
     )
 };

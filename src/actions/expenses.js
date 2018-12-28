@@ -10,7 +10,7 @@ export const addExpense = (expense) => ({
 // add expense to firebase
 export const startAddExpense = ({ description = "", amount = 0, createdAt = 0, note = "" } = {}) => {
     const expense = { description, amount, createdAt, note };
-
+    console.log(expense);
     return (dispatch, getState) => {
         const uid = getState().auth.uid;
 
@@ -19,6 +19,8 @@ export const startAddExpense = ({ description = "", amount = 0, createdAt = 0, n
                 id: ref.key,
                 ...expense
             }));
+        }).catch((e) => {
+            console.log(e);
         });
     };
 };
