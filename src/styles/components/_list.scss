@@ -26,6 +26,15 @@
     }
 }
 
+.list-item--message {
+    justify-content: center;
+    color: $gray;
+
+    &:hover {
+        background: none;
+    }
+}
+
 .list-item__title {
     margin: 0;
     color: $dark-gray;
