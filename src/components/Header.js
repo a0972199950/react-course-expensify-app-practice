@@ -14,7 +14,7 @@ const Header = (props) => (
 
                 <button className="button--link" onClick={() => {
                     props.startLogout()
-                }}>Logout</button>
+                }}>登出</button>
             </div>            
         </div>        
     </div>

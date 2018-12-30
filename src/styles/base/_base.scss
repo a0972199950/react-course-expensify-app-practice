@@ -8,9 +8,14 @@ html{
     font-size: 62.5%;
 }
 
+img {
+    display: block;
+    width: 100%;
+}
+
 body{
     // 字體優先順位，若前面的字體瀏覽器不支援則自動往下一個設定
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: Microsoft JhengHei, Helvetica, Arial, sans-serif;
 
     // rem和em都是相對單位，
     // rem相對於html的預設字體大小(本程式已被設定成10px)，1.6rem則為10px的1.6倍

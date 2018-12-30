@@ -10,10 +10,10 @@ import getVisibleExpenses from "../selectors/getVisibleExpenses";
 const ExpensesSummary = (props) => (
     <div className="page-header">
         <div className="content-container">
-            <h1 className="page-header__title">Viewing <span>{props.expensesCount}</span> expenses totalling <span>{numeral(props.expensesTotal).format("$0,0")}</span></h1>
+            <h1 className="page-header__title">嗨，{props.username}。您正在檢視 <span>{props.expensesCount}</span> 筆花費，總共 <span>{numeral(props.expensesTotal).format("$0,0")}</span>元</h1>
         
             <div className="page-header__actions">
-                <Link className="button" to="/create">Add Expense</Link>
+                <Link className="button" to="/create">新增花費</Link>
             </div>
         </div>        
     </div>    
@@ -25,7 +25,8 @@ const mapStateToProps = (state) => {
 
     return {
         expensesCount: visibleExpenses.length,
-        expensesTotal: getExpensesTotal(visibleExpenses)
+        expensesTotal: getExpensesTotal(visibleExpenses),
+        username: state.auth.username
     }
     
 };

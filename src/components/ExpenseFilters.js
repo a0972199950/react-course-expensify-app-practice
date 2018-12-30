@@ -42,7 +42,7 @@ class ExpenseFilters extends React.Component{
                         <input 
                             className="text-input"
                             type="text" 
-                            placeholder="Search expense" 
+                            placeholder="搜尋" 
                             value={this.props.filters.text}
                             onChange={this.onTextChange}
                         />
@@ -54,8 +54,8 @@ class ExpenseFilters extends React.Component{
                             defaultValue={this.props.filters.sortBy}
                             onChange={this.onSortByChange}
                         >
-                            <option value="date">Date</option>
-                            <option value="amount">Amount</option>
+                            <option value="date">按日期先後排序</option>
+                            <option value="amount">按費用多寡排序</option>
                         </select>
                     </div>
 

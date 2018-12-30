@@ -15,15 +15,19 @@
 .list-item {
     border: 1px darken($off-white, 7%) solid;
     border-top: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: $s-size $m-size;
     transition: background .2s ease;
+    display: block;
 
     &:hover {
         background: $off-white;
     }
+}
+
+.list-item__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .list-item--message {
@@ -46,10 +50,20 @@
     font-size: $font-size-small;
 }
 
-
-
 .list-item__data {
     margin: 0;
     color: $dark-gray;
 
+}
+
+.list-item__body {
+    margin-top: $s-size;
+    padding: $s-size;
+    border: 1px darken($off-white, 7%) solid;
+    border-radius: 5px;
+
+    p {
+        margin: 0;
+        color: $gray;
+    }
 }

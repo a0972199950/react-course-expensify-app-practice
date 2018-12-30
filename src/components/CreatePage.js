@@ -7,7 +7,7 @@ const CreatePage = (props) => (
     <div>
         <div className="page-header">
             <div className="content-container">
-                <h1 className="page-header__title">Add Expense</h1>
+                <h1 className="page-header__title">新增花費</h1>
             </div>
         </div>
 

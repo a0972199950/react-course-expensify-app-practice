@@ -19,7 +19,7 @@ class EditPage extends React.Component {
             <div>
                 <div className="page-header">
                     <div className="content-container">
-                        <h1 className="page-header__title">Edit Expense</h1>
+                        <h1 className="page-header__title">編輯明細</h1>
                     </div>
                 </div>
 

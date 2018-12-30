@@ -80,35 +80,12 @@ class ExpenseForm extends React.Component{
     onDeleteExpense = (e) => {
         e.preventDefault();
 
-        this.props.onDeleteExpense();
+        const confirm = window.confirm("確定要刪除嗎？");
+        if(confirm){
+            this.props.onDeleteExpense();
+        };
     }
 
-    // onSubmit = (event) => {
-    //     // 阻止表單提交
-    //     event.preventDefault();
-
-    //     // 解構物件
-    //     const {description, amount, createdAt, note} = this.state;
-
-    //     // 檢查必填資料
-    //     if(!description || !amount){
-    //         this.setState(() => ({
-    //             error: "Pleace fill out description and amount"
-    //         }));
-    //     } else{
-    //         this.setState(() => ({
-    //             error: ""
-    //         }));
-
-    //         // dispatch表單
-    //         this.props.onSubmit({
-    //             description,
-    //             amount: parseInt(amount),
-    //             createdAt: createdAt.valueOf(),
-    //             note
-    //         });
-    //     }        
-    // }
 
     render(){
         return (
@@ -119,7 +96,7 @@ class ExpenseForm extends React.Component{
                     <input 
                         className="text-input"
                         type="text" 
-                        placeholder="description" 
+                        placeholder="標題" 
                         value={this.state.description}
                         onChange={this.onDescriptionChange}
                     />
@@ -127,7 +104,7 @@ class ExpenseForm extends React.Component{
                     <input 
                         className="text-input"
                         type="text" 
-                        placeholder="amount" 
+                        placeholder="金額" 
                         value={this.state.amount}
                         onChange={this.onAmountChange}
                     />
@@ -143,7 +120,7 @@ class ExpenseForm extends React.Component{
 
                     <textarea 
                         className="textarea"
-                        placeholder="note(optional)"
+                        placeholder="備註(選填)"
                         value={this.state.note}
                         onChange={this.onNoteChange}
                     >
@@ -152,12 +129,12 @@ class ExpenseForm extends React.Component{
 
                 <div className="form__actions">
                     <div className="form__actions__item">
-                        <button className="button" onClick={this.onSetExpense}>{this.props.expenseToEdit ? "Edit Expense" : "Add Expense"}</button>
+                        <button className="button" onClick={this.onSetExpense}>{this.props.expenseToEdit ? "變更" : "新增"}</button>
                     </div>
 
                     {this.props.expenseToEdit ? (
                         <div className="form__actions__item">
-                            <button class="button button--delete" onClick={this.onDeleteExpense}>DELETE</button>
+                            <button class="button button--delete" onClick={this.onDeleteExpense}>刪除</button>
                         </div>
                     ) : false}
                 </div>

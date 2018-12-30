@@ -7,10 +7,13 @@ const LoginPage = (props) => (
     <div className="box-layout">
         <div className="box-layout__box">
             <h1 className="box-layout__title">Expensify</h1>
-            <p className="box-layout__subtitle">It's time to get your expenses under control.</p>
-            <button className="button" onClick={() => {
+            <p className="box-layout__subtitle">記帳也可以很簡單</p>
+
+            <button className="button-login" onClick={() => {
                 props.startLogin();
-            }}>Login with Google</button>
+            }}>
+                <img src="/images/sign-in-with-google.png" alt=""/>
+            </button>
         </div>
         
     </div>
