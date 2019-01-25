@@ -2,7 +2,22 @@ import React from "react";
 import moment from "moment";
 import { connect } from "react-redux";
 import { SingleDatePicker } from "react-dates";
+import Modal from "react-modal";
 import 'react-dates/lib/css/_datepicker.css';
+
+const modalStyle = {
+    content: {
+        top: "50%",
+        left: "50%",
+        right: "unset",
+        bottom: "unset",
+        transform: "translateX(-50%) translateY(-50%)",
+        display: "flex",
+        "flex-direction": "column",
+        "align-items": "stretch",
+        "padding": "3.2rem"
+    }
+};
 
 
 class ExpenseForm extends React.Component{
@@ -12,7 +27,8 @@ class ExpenseForm extends React.Component{
         createdAt: this.props.expenseToEdit ? moment(this.props.expenseToEdit.createdAt) : moment(),
         note: this.props.expenseToEdit ? this.props.expenseToEdit.note : "",
         error: "",
-        calendarFocused: false
+        calendarFocused: false,
+        modalIsOpen: false
     }
 
     onDescriptionChange = (event) => {
@@ -77,69 +93,93 @@ class ExpenseForm extends React.Component{
         }        
     }
 
-    onDeleteExpense = (e) => {
+    openModal = (e) => {
         e.preventDefault();
 
-        const confirm = window.confirm("確定要刪除嗎？");
-        if(confirm){
-            this.props.onDeleteExpense();
-        };
+        this.setState({
+            modalIsOpen: true
+        });
+
+    }
+
+    closeModal = () => {
+        this.setState({
+            modalIsOpen: false
+        });
     }
 
 
     render(){
         return (
-            <form className="form" onSubmit={this.onSubmit}>
-
-                <div className="form__inputs">
-                    {this.state.error && <p>{this.state.error}</p>}
-                    <input 
-                        className="text-input"
-                        type="text" 
-                        placeholder="標題" 
-                        value={this.state.description}
-                        onChange={this.onDescriptionChange}
-                    />
-
-                    <input 
-                        className="text-input"
-                        type="text" 
-                        placeholder="金額" 
-                        value={this.state.amount}
-                        onChange={this.onAmountChange}
-                    />
-
-                    <SingleDatePicker 
-                        date={this.state.createdAt}
-                        onDateChange={this.onDateChange}
-                        focused={this.state.calendarFocused}
-                        onFocusChange={this.onFocusChange}
-                        numberOfMonths={1}
-                        isOutsideRange={() => false}
-                    />
-
-                    <textarea 
-                        className="textarea"
-                        placeholder="備註(選填)"
-                        value={this.state.note}
-                        onChange={this.onNoteChange}
-                    >
-                    </textarea>
-                </div>
-
-                <div className="form__actions">
-                    <div className="form__actions__item">
-                        <button className="button" onClick={this.onSetExpense}>{this.props.expenseToEdit ? "變更" : "新增"}</button>
+            <div>
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    style={modalStyle}
+                    contentLabel="Example Modal"
+                >
+        
+                    <div>
+                        <h2 className="modal__title">確定要刪除嗎？</h2>
                     </div>
 
-                    {this.props.expenseToEdit ? (
-                        <div className="form__actions__item">
-                            <button class="button button--delete" onClick={this.onDeleteExpense}>刪除</button>
-                        </div>
-                    ) : false}
-                </div>
+                    <div className="modal__actions">
+                        <button className="button button--success" onClick={this.props.onDeleteExpense}>是</button>
+                        <button className="button button--danger" onClick={this.closeModal}>否</button>
+                    </div>
+                </Modal>
 
-            </form>
+                <form className="form" onSubmit={this.onSubmit}>
+                    <div className="form__inputs">
+                        {this.state.error && <p>{this.state.error}</p>}
+                        <input 
+                            className="text-input"
+                            type="text" 
+                            placeholder="標題" 
+                            value={this.state.description}
+                            onChange={this.onDescriptionChange}
+                        />
+
+                        <input 
+                            className="text-input"
+                            type="text" 
+                            placeholder="金額" 
+                            value={this.state.amount}
+                            onChange={this.onAmountChange}
+                        />
+
+                        <SingleDatePicker 
+                            date={this.state.createdAt}
+                            onDateChange={this.onDateChange}
+                            focused={this.state.calendarFocused}
+                            onFocusChange={this.onFocusChange}
+                            numberOfMonths={1}
+                            isOutsideRange={() => false}
+                        />
+
+                        <textarea 
+                            className="textarea"
+                            placeholder="備註(選填)"
+                            value={this.state.note}
+                            onChange={this.onNoteChange}
+                        >
+                        </textarea>
+                    </div>
+
+                    <div className="form__actions">
+                        <div className="form__actions__item">
+                            <button className="button" onClick={this.onSetExpense}>{this.props.expenseToEdit ? "變更" : "新增"}</button>
+                        </div>
+
+                        {this.props.expenseToEdit ? (
+                            <div className="form__actions__item">
+                                <button class="button button--delete" onClick={this.openModal}>刪除</button>
+                            </div>
+                        ) : false}
+                    </div>
+
+                </form>
+            </div>
+            
         );        
     }
 }

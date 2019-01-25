@@ -19,8 +19,21 @@
     background: rgb(240, 61, 61);
 }
 
+.button--success {
+    background: #28a745;
+    flex-grow: .4;
+}
+
+.button--danger {
+    background: #dc3545;
+    flex-grow: .4;
+}
+
 .button-login {
     border: none;
     padding: 0;
-    
+}
+
+.button-login--google {
+    margin-bottom: $m-size;
 }

@@ -1,0 +1,9 @@
+.modal__title {
+    margin: 0 0 $m-size 0;
+    white-space: nowrap;
+}
+
+.modal__actions {
+    display: flex;
+    justify-content: space-between;
+}
